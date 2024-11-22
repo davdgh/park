@@ -1,0 +1,23 @@
+-- Crear la tabla para los espacios de estacionamiento
+CREATE TABLE espacios (
+    id_espacio INT AUTO_INCREMENT PRIMARY KEY,
+    estado ENUM('vacío', 'ocupado', 'reservado') NOT NULL DEFAULT 'vacío'
+);
+
+-- Crear la tabla para los vehículos estacionados
+CREATE TABLE vehiculos_estacionados (
+    id_vehiculo INT AUTO_INCREMENT PRIMARY KEY,
+    id_espacio INT,
+    hora_entrada DATETIME NOT NULL,
+    hora_salida DATETIME,
+    tarifa DECIMAL(10, 2),
+    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio)
+);
+
+-- Crear la tabla para las tarifas
+CREATE TABLE tarifas (
+    tarifa DECIMAL(10, 2) NOT NULL
+);
+
+-- Insertar la tarifa fija en la tabla de tarifas
+INSERT INTO tarifas (tarifa) VALUES (5.00);  -- Ejemplo de tarifa fija por hora
